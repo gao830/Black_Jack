@@ -3,18 +3,9 @@
 
 #include <iostream>
 #include <stdio.h>
-class Model {
-public:
-    Model();
-    void drawCard(int currentPlayer);
-    void initDeck();
-    
-    
-    
-};
-
-
-
+#include <stdlib.h> 
+#include <time.h>
+using namespace std;
 
 class Model {
 	public:

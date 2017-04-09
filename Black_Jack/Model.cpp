@@ -9,13 +9,14 @@ void Model::initDeck() {
 }
 
 void Model::drawCard(int currentPlayer) {
-	srand(time(NULL));
+//	srand(time(NULL));
+    srand( static_cast<unsigned int>(time(NULL)));
 	int suit = rand() % 4;
 	int card = rand() % 13;
 	int chosenCard = deck[suit][card];
 	if(currentPlayer == 0) {
 		dealerHand[dealerHandSize] = chosenCard;
-		dealerHandSize++:
+        dealerHandSize++;
 	}
 	if(currentPlayer == 1) {
 		playerHand[playerHandSize] = chosenCard;
@@ -60,14 +61,14 @@ void Model::drawCard(int currentPlayer) {
 }
 
 void Model::determineWinner() {
-	int playerScore;
-	int dealerScore;
+	int playerScore = 0;
+	int dealerScore = 0;
 
 	for(int i = 0; i < playerHandSize; i++) {
 		playerScore += playerHand[i];
 	}
 	for(int i = 0; i < dealerHandSize; i++) {
-			dealerScore += dealerHand[i];
+        dealerScore += dealerHand[i];
 	}
 	if(playerScore == dealerScore) {
 		//Draw

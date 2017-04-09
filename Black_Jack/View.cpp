@@ -11,6 +11,10 @@ void View::promptForHoldOrHit() {
     return;
 }
 
-void View::displayWinner() {
-    
+void View::displayWinner(int identifier) {
+    if(identifier == 0) {
+        cout << "It's a tie!" << endl;
+    } else if (identifier == 1) {
+//        cout << "
+    }
 }
