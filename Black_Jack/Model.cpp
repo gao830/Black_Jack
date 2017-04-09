@@ -22,42 +22,42 @@ void Model::drawCard(int currentPlayer) {
 		playerHand[playerHandSize] = chosenCard;
 		playerHandSize++;
 	}
-	char faceCard;
-	switch (card) {
+	string faceCard;
+	switch (chosenCard) {
 		case 10:
-			faceCard = 'T';
+			faceCard = "T";
 			break;
 		case 11:
-			faceCard = 'J';
+			faceCard = "J";
 			break;
 		case 12:
-			faceCard = 'Q';
+			faceCard = "Q";
 			break;
 		case 13:
-			faceCard = 'K';
+			faceCard = "K";
 			break;
 		case 14:
-			faceCard = 'A';
+			faceCard = "K";
 			break;
 		default:
-			faceCard = char(card);
+			faceCard = numberToString(chosenCard);
 	}
 	switch (suit) {
 		case 0:
-			cout << "Heart: " << faceCard  << endl;
+			cardDrawn = "Heart: " + faceCard;
 			break;
 		case 1:
-			cout << "Diamond: " << faceCard << endl;
+			cardDrawn = "Diamond: " + faceCard;
 			break;
 		case 2:
-			cout << "Spade: " << faceCard << endl;
+			cardDrawn = "Spade: " + faceCard;
 			break;
 		case 3:
-			cout << "Clubs: "<< faceCard << endl;
+			cardDrawn =  "Clubs: " + faceCard;
 			break;
 
 	}
-
+	return cardDrawn;
 }
 
 void Model::determineWinner() {
@@ -65,18 +65,26 @@ void Model::determineWinner() {
 	int dealerScore = 0;
 
 	for(int i = 0; i < playerHandSize; i++) {
-		playerScore += playerHand[i];
+		if(playerHand[i] < 11) {
+			playerScore += playerHand[i];
+		}
+		if(playerHand[i] > 10 && playerHand[i] < 14) {
+			playerScore += 10;
+		}
+		if(playerHand[i] == 14) {
+			playerScore += 11;
+		}
 	}
 	for(int i = 0; i < dealerHandSize; i++) {
         dealerScore += dealerHand[i];
 	}
 	if(playerScore == dealerScore) {
-		//Draw
+		return 0;
 	}
 	if(playerScore < dealerScore) {
-		//Lose
+		return 1;
 	}
 	if(playerScore > dealerScore) {
-		//Win
+		return 2;
 	}
 }

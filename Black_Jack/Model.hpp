@@ -16,8 +16,8 @@ class Model {
 	int dealerHandSize = 0;
 	private:
 	void initDeck();
-	void drawCard(int currentPlayer);
-	void determineWinner();
+	string drawCard(int currentPlayer);
+	int determineWinner();
 
 };
 
