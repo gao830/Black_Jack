@@ -67,12 +67,12 @@
 			isa = PBXGroup;
 			children = (
 				FC5D9D001E9ABD29009D3462 /* main.cpp */,
-				FC5D9D071E9ABEC2009D3462 /* Model.cpp */,
 				FC5D9D081E9ABEC2009D3462 /* Model.hpp */,
-				FC5D9D0A1E9ABED1009D3462 /* View.cpp */,
+				FC5D9D071E9ABEC2009D3462 /* Model.cpp */,
 				FC5D9D0B1E9ABED1009D3462 /* View.hpp */,
-				FC5D9D0D1E9ABEDB009D3462 /* Controller.cpp */,
+				FC5D9D0A1E9ABED1009D3462 /* View.cpp */,
 				FC5D9D0E1E9ABEDB009D3462 /* Controller.hpp */,
+				FC5D9D0D1E9ABEDB009D3462 /* Controller.cpp */,
 			);
 			path = Black_Jack;
 			sourceTree = "<group>";

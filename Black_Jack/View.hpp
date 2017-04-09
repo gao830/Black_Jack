@@ -1,14 +1,14 @@
-//
-//  View.hpp
-//  Black_Jack
-//
-//  Created by Yunpeng Gao on 4/9/17.
-//  Copyright © 2017 Yunpeng Gao. All rights reserved.
-//
-
 #ifndef View_hpp
 #define View_hpp
 
+#include <iostream>
 #include <stdio.h>
+class View {
+public:
+    View();
+    void promptForHoldOrHit();
+    void displayWinner();
+};
+
 
 #endif /* View_hpp */
