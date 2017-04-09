@@ -1,14 +1,14 @@
 #include "Model.hpp"
 
 void Model::initDeck() {
-	for(int i = 0; i++; i < 4) {
-		for(int j = 0; j++; j < 13) {
+    for(int i = 0; i < 4; i++ ) {
+        for(int j = 0;  j < 13; j++) {
 			deck[i][j] = j+2;
 		}
 	}
 }
 
-void Model::drawCard(currentPlayer) {
+void Model::drawCard(int currentPlayer) {
 	srand(time(NULL));
 	int suit = rand() % 4;
 	int card = rand() % 13;
