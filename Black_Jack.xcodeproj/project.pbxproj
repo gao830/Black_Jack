@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		FC5D9D011E9ABD29009D3462 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC5D9D001E9ABD29009D3462 /* main.cpp */; };
+		FC5D9D091E9ABEC2009D3462 /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC5D9D071E9ABEC2009D3462 /* Model.cpp */; };
+		FC5D9D0C1E9ABED1009D3462 /* View.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC5D9D0A1E9ABED1009D3462 /* View.cpp */; };
+		FC5D9D0F1E9ABEDB009D3462 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC5D9D0D1E9ABEDB009D3462 /* Controller.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +28,12 @@
 /* Begin PBXFileReference section */
 		FC5D9CFD1E9ABD29009D3462 /* Black_Jack */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Black_Jack; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5D9D001E9ABD29009D3462 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		FC5D9D071E9ABEC2009D3462 /* Model.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Model.cpp; sourceTree = "<group>"; };
+		FC5D9D081E9ABEC2009D3462 /* Model.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Model.hpp; sourceTree = "<group>"; };
+		FC5D9D0A1E9ABED1009D3462 /* View.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = View.cpp; sourceTree = "<group>"; };
+		FC5D9D0B1E9ABED1009D3462 /* View.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = View.hpp; sourceTree = "<group>"; };
+		FC5D9D0D1E9ABEDB009D3462 /* Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Controller.cpp; sourceTree = "<group>"; };
+		FC5D9D0E1E9ABEDB009D3462 /* Controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Controller.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +67,12 @@
 			isa = PBXGroup;
 			children = (
 				FC5D9D001E9ABD29009D3462 /* main.cpp */,
+				FC5D9D071E9ABEC2009D3462 /* Model.cpp */,
+				FC5D9D081E9ABEC2009D3462 /* Model.hpp */,
+				FC5D9D0A1E9ABED1009D3462 /* View.cpp */,
+				FC5D9D0B1E9ABED1009D3462 /* View.hpp */,
+				FC5D9D0D1E9ABEDB009D3462 /* Controller.cpp */,
+				FC5D9D0E1E9ABEDB009D3462 /* Controller.hpp */,
 			);
 			path = Black_Jack;
 			sourceTree = "<group>";
@@ -120,7 +135,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC5D9D0C1E9ABED1009D3462 /* View.cpp in Sources */,
 				FC5D9D011E9ABD29009D3462 /* main.cpp in Sources */,
+				FC5D9D091E9ABEC2009D3462 /* Model.cpp in Sources */,
+				FC5D9D0F1E9ABEDB009D3462 /* Controller.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
