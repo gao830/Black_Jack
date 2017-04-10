@@ -5,6 +5,10 @@ View::View() {
     
 }
 
+void View::greeting() {
+    cout << "Welcome to Black Jack game!" << endl;
+}
+
 void View::promptForHoldOrHit() {
     cout << "Do you want to hold or hit? (1 for hold, 2 for hit)" << endl;
     

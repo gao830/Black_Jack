@@ -5,5 +5,13 @@ Controller::Controller(View &view) {
 }
 
 void Controller::startGame() {
-    cout << "Hello world" << endl;
+    int choice;
+    view.greeting();
+    view.promptForHoldOrHit();
+    cin >> choice;
+    while(choice != 1 && choice != 2) {
+        view.promptForHoldOrHit();
+        cin >> choice;
+    }
+    
 }

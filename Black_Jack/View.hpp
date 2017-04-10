@@ -6,6 +6,7 @@
 class View {
 public:
     View();
+    void greeting();
     void promptForHoldOrHit();
     void displayWinner(int identifier);
 };

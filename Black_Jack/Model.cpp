@@ -8,7 +8,7 @@ void Model::initDeck() {
 	}
 }
 
-void Model::drawCard(int currentPlayer) {
+string Model::drawCard(int currentPlayer) {
 //	srand(time(NULL));
     srand( static_cast<unsigned int>(time(NULL)));
 	int suit = rand() % 4;
@@ -23,6 +23,8 @@ void Model::drawCard(int currentPlayer) {
 		playerHandSize++;
 	}
 	string faceCard;
+    string cardDrawn;
+    
 	switch (chosenCard) {
 		case 10:
 			faceCard = "T";
@@ -40,8 +42,11 @@ void Model::drawCard(int currentPlayer) {
 			faceCard = "K";
 			break;
 		default:
-			faceCard = numberToString(chosenCard);
+			faceCard = to_string(chosenCard);
+            
 	}
+    
+    
 	switch (suit) {
 		case 0:
 			cardDrawn = "Heart: " + faceCard;
@@ -60,7 +65,8 @@ void Model::drawCard(int currentPlayer) {
 	return cardDrawn;
 }
 
-void Model::determineWinner() {
+int Model::determineWinner() {
+    
 	int playerScore = 0;
 	int dealerScore = 0;
 
@@ -75,16 +81,16 @@ void Model::determineWinner() {
 			playerScore += 11;
 		}
 	}
+    
 	for(int i = 0; i < dealerHandSize; i++) {
         dealerScore += dealerHand[i];
 	}
+    
 	if(playerScore == dealerScore) {
 		return 0;
-	}
-	if(playerScore < dealerScore) {
+	} else if(playerScore < dealerScore) {
 		return 1;
-	}
-	if(playerScore > dealerScore) {
+	} else {
 		return 2;
 	}
 }

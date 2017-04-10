@@ -4,7 +4,6 @@
 
 using namespace std;
 int main(int argc, const char * argv[]) {
-    
     View view;
     Controller controller(view);
     controller.startGame();
