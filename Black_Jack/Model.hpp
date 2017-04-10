@@ -25,7 +25,7 @@ class Model {
 	void dealerTurn();
 	void playerTurn();
 	void playRound();
-	void updateScores();
+	int updateScores();
 	string drawCard(int currentPlayer);
 	int determineWinner();
 };

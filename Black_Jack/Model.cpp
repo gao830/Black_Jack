@@ -74,17 +74,17 @@ int Model::determineWinner() {
 	if(playerScore == dealerScore) {
 		return 0;
 	}
-	if(playerScore < dealerScore) {
+	else if(playerScore < dealerScore) {
 		return 1;
 	}
-	if(playerScore > dealerScore) {
+	else {
 		return 2;
 	}
 }
 
 //updates the current scores
 //call this function at the beginning of each Turn function
-void Model::updateScores() {
+int Model::updateScores() {
 	playerScore = 0;
 	dealerScore = 0;
 
