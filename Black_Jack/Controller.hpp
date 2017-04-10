@@ -17,4 +17,8 @@ private:
 
 
 
+class Controller {
+
+};
+
 #endif /* Controller_hpp */

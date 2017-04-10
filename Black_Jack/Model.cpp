@@ -6,6 +6,7 @@ void Model::initDeck() {
 			deck[i][j] = j+2;
 		}
 	}
+	
 }
 
 string Model::drawCard(int currentPlayer) {
@@ -70,14 +71,31 @@ int Model::determineWinner() {
 	int playerScore = 0;
 	int dealerScore = 0;
 
-	for(int i = 0; i < playerHandSize; i++) {
-		if(playerHand[i] < 11) {
+	if(playerScore == dealerScore) {
+		return 0;
+	}
+	if(playerScore < dealerScore) {
+		return 1;
+	}
+	if(playerScore > dealerScore) {
+		return 2;
+	}
+}
+
+//updates the current scores
+//call this function at the beginning of each Turn function
+void Model::updateScores() {
+	playerScore = 0;
+	dealerScore = 0;
+
+	for (int i = 0; i < playerHandSize; i++) {
+		if (playerHand[i] < 11) {
 			playerScore += playerHand[i];
 		}
-		if(playerHand[i] > 10 && playerHand[i] < 14) {
+		if (playerHand[i] > 10 && playerHand[i] < 14) {
 			playerScore += 10;
 		}
-		if(playerHand[i] == 14) {
+		if (playerHand[i] == 14) {
 			playerScore += 11;
 		}
 	}
@@ -93,4 +111,18 @@ int Model::determineWinner() {
 	} else {
 		return 2;
 	}
+}
+
+//contains the loop for playing the game
+void Model::playRound() {
+	initDeck();
+	dealOpeningHands();
+
+	while (!endGame) {
+		dealerTurn();
+		playerTurn();
+	}
+
+	updateScores();
+	determineWinner();
 }

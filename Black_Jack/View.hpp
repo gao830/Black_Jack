@@ -12,4 +12,8 @@ public:
 };
 
 
+class View {
+
+};
+
 #endif /* View_hpp */
