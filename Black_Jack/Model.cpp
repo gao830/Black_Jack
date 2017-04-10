@@ -9,23 +9,28 @@
 #include "Model.hpp"
 
 void Model::initDeck() {
-	for(int i = 0; i++; i < 4) {
-		for(int j = 0; j++; j < 13) {
-			deck[i][j] = j+2;
+	deck = new int *[4];
+	for (int i = 0; i < 4; i++) {
+		deck[i] = new int[13];
+
+		//populate the table
+		for (int j = 0; j < 13; j++) {
+			deck[i][j] = j + 2;
 		}
 	}
+	
 }
 
 //currentPlayer = 0 for dealer and currentPlayer = 1 for player
-string Model::drawCard(currentPlayer) {
-	srand(time(NULL));
+string Model::drawCard(int currentPlayer) {
+	//need to implement a way to keep track of which cards have been drawn
 	string cardDrawn;
 	int suit = rand() % 4;
 	int card = rand() % 13;
 	int chosenCard = deck[suit][card];
 	if(currentPlayer == 0) {
 		dealerHand[dealerHandSize] = chosenCard;
-		dealerHandSize++:
+		dealerHandSize++;
 	}
 	if(currentPlayer == 1) {
 		playerHand[playerHandSize] = chosenCard;
@@ -49,7 +54,9 @@ string Model::drawCard(currentPlayer) {
 			faceCard = "K";
 			break;
 		default:
-			faceCard = numberToString(chosenCard);
+			ostringstream convert;
+			convert << chosenCard;
+			faceCard = convert.str();
 	}
 	switch (suit) {
 		case 0:
@@ -70,31 +77,8 @@ string Model::drawCard(currentPlayer) {
 }
 //Returns 0 for draw, 1 for dealer win, 2 for player win
 int Model::determineWinner() {
-	int playerScore;
-	int dealerScore;
+	updateScores();
 
-	for(int i = 0; i < playerHandSize; i++) {
-		if(playerHand[i] < 11) {
-			playerScore += playerHand[i];
-		}
-		if(playerHand[i] > 10 && playerHand[i] < 14) {
-			playerScore += 10;
-		}
-		if(playerHand[i] == 14) {
-			playerScore += 11;
-		}
-	}
-	for(int i = 0; i < dealerHandSize; i++) {
-		if(dealerHand[i] < 11) {
-			dealerScore += dealerHand[i];
-		}
-		if(dealerHand[i] > 10 && dealerHand[i] < 14) {
-			dealerScore += 10;
-		}
-		if(dealerHand[i] == 14) {
-			dealerScore += 11;
-		}
-	}
 	if(playerScore == dealerScore) {
 		return 0;
 	}
@@ -104,4 +88,116 @@ int Model::determineWinner() {
 	if(playerScore > dealerScore) {
 		return 2;
 	}
+}
+
+//updates the current scores
+//call this function at the beginning of each Turn function
+void Model::updateScores() {
+	playerScore = 0;
+	dealerScore = 0;
+
+	for (int i = 0; i < playerHandSize; i++) {
+		if (playerHand[i] < 11) {
+			playerScore += playerHand[i];
+		}
+		if (playerHand[i] > 10 && playerHand[i] < 14) {
+			playerScore += 10;
+		}
+		if (playerHand[i] == 14) {
+			playerScore += 11;
+		}
+	}
+	for (int i = 0; i < dealerHandSize; i++) {
+		if (dealerHand[i] < 11) {
+			dealerScore += dealerHand[i];
+		}
+		if (dealerHand[i] > 10 && dealerHand[i] < 14) {
+			dealerScore += 10;
+		}
+		if (dealerHand[i] == 14) {
+			dealerScore += 11;
+		}
+	}
+}
+
+//initializes the opening hands
+//these cards should be displayed in the view, not here
+void Model::dealOpeningHands() {
+	string displayMe;
+	for (int i = 0; i < numPlayers; i++) {
+		displayMe = drawCard(1);
+		cout << "You're dealt " << displayMe << endl;
+	}
+
+	displayMe = drawCard(0);
+	cout << "Dealer draws " << displayMe << endl;
+
+	for (int i = 0; i < numPlayers; i++) {
+		displayMe = drawCard(1);
+		cout << "You're dealt " << displayMe << endl;
+	}
+
+	faceDownCard = drawCard(0);
+}
+
+//the dealer takes their turn
+//these cards should be displayed in the view, not here
+void Model::dealerTurn() {
+	updateScores();
+	cout << "Dealer's total: " << dealerScore << endl;
+
+	string displayMe;
+	if (dealerScore >= 21) {
+		endGame = true;
+	}
+	else if(dealerScore <= 16) {
+		cout << "Dealer hits." << endl;
+		displayMe = drawCard(0);
+		cout << "Dealer draws " << displayMe << endl;
+		updateScores();
+	}
+	else {
+		cout << "Dealer stands." << endl;
+	}
+	cout << "Dealer's total: " << dealerScore << endl;
+}
+
+//the player takes their turn
+//the prompt should be in the view, but I'm putting it here for now
+void Model::playerTurn() {
+	updateScores();
+	cout << "Your total: " << playerScore << endl;
+
+	if (playerScore >= 21) {
+		endGame = true;
+	}
+
+	char action;
+	string displayMe;
+
+	cout << "Type s to stand or h to hit." << endl;
+	cin >> action;
+
+	switch (action) {
+	case 's':
+		break;
+	case 'h':
+		displayMe = drawCard(1);
+		cout << "You're dealt " << displayMe << endl;
+		break;
+	}
+}
+
+//contains the loop for playing the game
+void Model::playRound() {
+	initDeck();
+	dealOpeningHands();
+
+	while (!endGame) {
+		dealerTurn();
+		playerTurn();
+	}
+
+	updateScores();
+	determineWinner();
 }

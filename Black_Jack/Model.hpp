@@ -9,22 +9,34 @@
 #ifndef Model_hpp
 #define Model_hpp
 
-#include <stdio.h>
+#include <iostream>
+#include <time.h>
+#include <sstream>
+
+using namespace std;
+//#include <string>
 
 class Model {
 	public:
-	int deck[4][13];
+	int ** deck = NULL;
 	int playerHand[10];
 	int dealerHand[10];
 	int playerHandSize = 0;
 	int dealerHandSize = 0;
-	private:
+	int playerScore = 0;
+	int dealerScore = 0;
+	int numPlayers = 1;
+	bool endGame = 0;
+	string faceDownCard;
+	//private:
 	void initDeck();
+	void dealOpeningHands();
+	void dealerTurn();
+	void playerTurn();
+	void playRound();
+	void updateScores();
 	string drawCard(int currentPlayer);
 	int determineWinner();
-
 };
-
-
 
 #endif /* Model_hpp */

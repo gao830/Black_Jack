@@ -7,9 +7,12 @@
 //
 
 #include <iostream>
+#include "Model.hpp"
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+	srand(time(NULL));
+
+	Model test2;
+	test2.playRound();
     return 0;
 }
