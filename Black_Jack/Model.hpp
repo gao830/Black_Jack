@@ -14,7 +14,6 @@
 #include <sstream>
 
 using namespace std;
-//#include <string>
 
 class Model {
 	public:
@@ -27,6 +26,8 @@ class Model {
 	int dealerScore = 0;
 	int numPlayers = 1;
 	bool endGame = 0;
+	bool dealerStand = 0;
+	bool playerStand = 0;
 	string faceDownCard;
 	//private:
 	void initDeck();

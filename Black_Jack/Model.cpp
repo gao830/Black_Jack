@@ -18,7 +18,6 @@ void Model::initDeck() {
 			deck[i][j] = j + 2;
 		}
 	}
-	
 }
 
 //currentPlayer = 0 for dealer and currentPlayer = 1 for player
@@ -75,9 +74,20 @@ string Model::drawCard(int currentPlayer) {
 	}
 	return cardDrawn;
 }
+
 //Returns 0 for draw, 1 for dealer win, 2 for player win
 int Model::determineWinner() {
 	updateScores();
+
+	//player goes bust
+	if (playerScore > 21 && dealerScore <= 21) {
+		return 1;
+	}
+
+	//dealer goes bust
+	if (dealerScore > 21 && playerScore <= 21) {
+		return 2;
+	}
 
 	if(playerScore == dealerScore) {
 		return 0;
@@ -123,6 +133,8 @@ void Model::updateScores() {
 //initializes the opening hands
 //these cards should be displayed in the view, not here
 void Model::dealOpeningHands() {
+	cout << "Opening hands!" << endl;
+
 	string displayMe;
 	for (int i = 0; i < numPlayers; i++) {
 		displayMe = drawCard(1);
@@ -143,12 +155,15 @@ void Model::dealOpeningHands() {
 //the dealer takes their turn
 //these cards should be displayed in the view, not here
 void Model::dealerTurn() {
+	cout << endl;
+	cout << "Dealer's turn!" << endl;
+
 	updateScores();
-	cout << "Dealer's total: " << dealerScore << endl;
 
 	string displayMe;
 	if (dealerScore >= 21) {
 		endGame = true;
+		return;
 	}
 	else if(dealerScore <= 16) {
 		cout << "Dealer hits." << endl;
@@ -158,18 +173,22 @@ void Model::dealerTurn() {
 	}
 	else {
 		cout << "Dealer stands." << endl;
+		dealerStand = true;
 	}
-	cout << "Dealer's total: " << dealerScore << endl;
 }
 
 //the player takes their turn
 //the prompt should be in the view, but I'm putting it here for now
 void Model::playerTurn() {
+	cout << endl;
+	cout << "Your turn!" << endl;
+
 	updateScores();
 	cout << "Your total: " << playerScore << endl;
 
 	if (playerScore >= 21) {
 		endGame = true;
+		return;
 	}
 
 	char action;
@@ -180,6 +199,7 @@ void Model::playerTurn() {
 
 	switch (action) {
 	case 's':
+		playerStand = true;
 		break;
 	case 'h':
 		displayMe = drawCard(1);
@@ -190,14 +210,30 @@ void Model::playerTurn() {
 
 //contains the loop for playing the game
 void Model::playRound() {
+	int result;
 	initDeck();
 	dealOpeningHands();
 
 	while (!endGame) {
 		dealerTurn();
 		playerTurn();
+		if (dealerStand && playerStand) {
+			endGame = true;
+		}
 	}
 
 	updateScores();
-	determineWinner();
+	result = determineWinner();
+
+	if (result == 0) {
+		cout << "Tie!" << endl;
+	}
+	else if (result == 1) {
+		cout << "Dealer wins!" << endl;
+	}
+	else if (result == 2) {
+		cout << "Player wins!" << endl;
+	}
+
+	cout << "Dealer score: " << dealerScore << endl;
 }
