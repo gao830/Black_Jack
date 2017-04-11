@@ -16,6 +16,7 @@ private:
     View view;
     Model model;
     string cardDrawn;
+    int playerScore;
 };
 
 

@@ -3,13 +3,15 @@
 
 #include <iostream>
 #include <stdio.h>
+using namespace std;
+
 class View {
 public:
     View();
     void greeting();
     void promptForHoldOrHit();
     void displayWinner(int identifier);
-//    void displayCardDrawnAnd;
+    void displayCardDrawnAndScore(int score, string cardDrawn);
 };
 
 

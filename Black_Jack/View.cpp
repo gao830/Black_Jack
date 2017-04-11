@@ -22,3 +22,9 @@ void View::displayWinner(int identifier) {
 //        cout << "
     }
 }
+
+void View::displayCardDrawnAndScore(int score, string cardDrawn) {
+    cout << "Card drawn: " << cardDrawn << endl;
+    cout << "Score: " << score << endl;
+}
+
