@@ -37,7 +37,7 @@ class Model {
 	int getDealerScore();
 	int getTotalMoney();
 	void setBetAmount();
-
+    void clear();
 };
 
 #endif /* Model_hpp */

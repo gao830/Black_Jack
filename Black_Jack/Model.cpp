@@ -73,11 +73,13 @@ int Model::determineWinner(int betAmount) {
     
     //player goes bust
     if (playerScore > 21 && dealerScore <= 21) {
+        totalMoney = totalMoney - betAmount;
         return 1;
     }
     
     //dealer goes bust
     if (dealerScore > 21 && playerScore <= 21) {
+        totalMoney = totalMoney + betAmount;
         return 2;
     }
     
@@ -253,4 +255,21 @@ void Model::setBetAmount() {
 	cin >> bet;
 	betAmount = bet;
 	cout << "The amount you chose to bet was: " << betAmount << endl;
+}
+
+void Model::clear() {
+    for (int i = 0; i < 9; i++){
+        playerHand[i] = 0;
+        dealerHand[i] = 0;
+    }
+
+    betAmount = 0;
+    playerHandSize = 0;
+    dealerHandSize = 0;
+    playerScore = 0;
+    dealerScore = 0;
+    numPlayers = 1;
+    endGame = 0;
+    dealerStand = 0;
+    playerStand = 0;
 }

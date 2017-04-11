@@ -15,6 +15,7 @@ int main(int argc, const char * argv[]) {
         model.playRound();
         cout << "Do you want to play it again? (1 for yes, 2 for no)" << endl;
         cin >> playGames;
+        model.clear();
     }
     return 0;
 }
