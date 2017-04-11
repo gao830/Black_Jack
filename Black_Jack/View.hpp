@@ -9,11 +9,8 @@ public:
     void greeting();
     void promptForHoldOrHit();
     void displayWinner(int identifier);
+//    void displayCardDrawnAnd;
 };
 
-
-class View {
-
-};
 
 #endif /* View_hpp */

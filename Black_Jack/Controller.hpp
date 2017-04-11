@@ -11,8 +11,11 @@ class Controller {
 public:
     Controller(View &view);
     void startGame();
+    void hitOrHold();
 private:
     View view;
+    Model model;
+    string cardDrawn;
 };
 
 
