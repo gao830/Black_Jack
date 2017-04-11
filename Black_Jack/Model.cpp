@@ -218,8 +218,12 @@ void Model::playRound() {
 	dealOpeningHands();
 
 	while (!endGame) {
-		dealerTurn();
-		playerTurn();
+		if(!playerStand) {
+			playerTurn();
+		}
+		if(playerStand) {
+			dealerTurn();
+		}
 		if (dealerStand && playerStand) {
 			endGame = true;
 		}
