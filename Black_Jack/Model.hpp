@@ -1,11 +1,3 @@
-//
-//  Model.hpp
-//  Black_Jack
-//
-//  Created by Yunpeng Gao on 4/9/17.
-//  Copyright © 2017 Yunpeng Gao. All rights reserved.
-//
-
 #ifndef Model_hpp
 #define Model_hpp
 
@@ -16,6 +8,7 @@
 using namespace std;
 
 class Model {
+
 	public:
 	int ** deck = NULL;
 	int playerHand[10];
@@ -44,6 +37,7 @@ class Model {
 	int getDealerScore();
 	int getTotalMoney();
 	void setBetAmount();
+
 };
 
 #endif /* Model_hpp */

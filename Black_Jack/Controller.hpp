@@ -1,18 +1,23 @@
-//
-//  Controller.hpp
-//  Black_Jack
-//
-//  Created by Yunpeng Gao on 4/9/17.
-//  Copyright © 2017 Yunpeng Gao. All rights reserved.
-//
-
 #ifndef Controller_hpp
 #define Controller_hpp
 
+#include <iostream>
 #include <stdio.h>
+#include "View.hpp"
+#include "Model.hpp"
+using namespace std;
 
 class Controller {
-
+public:
+    Controller(View &view);
+    void startGame();
+    void hitOrHold();
+private:
+    View view;
+    Model model;
+    string cardDrawn;
 };
+
+
 
 #endif /* Controller_hpp */

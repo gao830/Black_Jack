@@ -1,18 +1,11 @@
-//
-//  main.cpp
-//  Black_Jack
-//
-//  Created by Yunpeng Gao on 4/9/17.
-//  Copyright © 2017 Yunpeng Gao. All rights reserved.
-//
-
 #include <iostream>
-#include "Model.hpp"
+#include "View.hpp"
+#include "Controller.hpp"
 
+using namespace std;
 int main(int argc, const char * argv[]) {
-	srand(time(NULL));
-
-	Model test2;
-	test2.playRound();
+    View view;
+    Controller controller(view);
+    controller.startGame();
     return 0;
 }
