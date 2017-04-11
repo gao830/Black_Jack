@@ -6,7 +6,6 @@ void Model::initDeck() {
 			deck[i][j] = j+2;
 		}
 	}
-	
 }
 
 string Model::drawCard(int currentPlayer) {
@@ -71,6 +70,16 @@ int Model::determineWinner() {
 	int playerScore = 0;
 	int dealerScore = 0;
 
+	//player goes bust
+	if (playerScore > 21 && dealerScore <= 21) {
+		return 1;
+	}
+
+	//dealer goes bust
+	if (dealerScore > 21 && playerScore <= 21) {
+		return 2;
+	}
+
 	if(playerScore == dealerScore) {
 		return 0;
 	}
@@ -115,12 +124,16 @@ int Model::updateScores() {
 
 //contains the loop for playing the game
 void Model::playRound() {
+	int result;
 	initDeck();
 	dealOpeningHands();
 
 	while (!endGame) {
 		dealerTurn();
 		playerTurn();
+		if (dealerStand && playerStand) {
+			endGame = true;
+		}
 	}
 
 	updateScores();
