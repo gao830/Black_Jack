@@ -12,11 +12,13 @@ public:
     int ** deck = NULL;
     int playerHand[10];
     int dealerHand[10];
+    int totalMoney = 100;
     int playerHandSize = 0;
     int dealerHandSize = 0;
     int playerScore = 0;
     int dealerScore = 0;
     int numPlayers = 1;
+    int betAmount = 0;
     bool endGame = 0;
     bool dealerStand = 0;
     bool playerStand = 0;
@@ -29,7 +31,10 @@ public:
     void playRound();
     void updateScores();
     string drawCard(int currentPlayer);
-    int determineWinner();
+    int determineWinner(int betAmount);
+    int getPlayerScore();
+    int getDealerScore();
+    int getTotalMoney();
 };
 
 #endif /* Model_hpp */

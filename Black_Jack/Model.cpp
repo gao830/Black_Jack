@@ -18,9 +18,7 @@ string Model::drawCard(int currentPlayer) {
     string cardDrawn;
     int suit = rand() % 4;
     int card = rand() % 13;
-    int chosenCard;
-    chosenCard = deck[suit][card];
-    
+    int chosenCard = deck[suit][card];
     if(currentPlayer == 0) {
         dealerHand[dealerHandSize] = chosenCard;
         dealerHandSize++;
@@ -44,7 +42,7 @@ string Model::drawCard(int currentPlayer) {
             faceCard = "K";
             break;
         case 14:
-            faceCard = "A";
+            faceCard = "K";
             break;
         default:
             ostringstream convert;
@@ -70,7 +68,7 @@ string Model::drawCard(int currentPlayer) {
 }
 
 //Returns 0 for draw, 1 for dealer win, 2 for player win
-int Model::determineWinner() {
+int Model::determineWinner(int betAmount) {
     updateScores();
     
     //player goes bust
@@ -86,9 +84,10 @@ int Model::determineWinner() {
     if(playerScore == dealerScore) {
         return 0;
     } else if(playerScore < dealerScore) {
+        totalMoney = totalMoney - betAmount;
         return 1;
-    }
-    else {
+    } else {
+        totalMoney = totalMoney + betAmount;
         return 2;
     }
 }
@@ -121,6 +120,7 @@ void Model::updateScores() {
             dealerScore += 11;
         }
     }
+    
 }
 
 //initializes the opening hands
@@ -208,15 +208,19 @@ void Model::playRound() {
     dealOpeningHands();
     
     while (!endGame) {
-        dealerTurn();
-        playerTurn();
+        if(!playerStand) {
+            playerTurn();
+        }
+        if(playerStand) {
+            dealerTurn();
+        }
         if (dealerStand && playerStand) {
             endGame = true;
         }
     }
     
     updateScores();
-    result = determineWinner();
+    result = determineWinner(betAmount);
     
     if (result == 0) {
         cout << "Tie!" << endl;
@@ -229,4 +233,14 @@ void Model::playRound() {
     }
     
     cout << "Dealer score: " << dealerScore << endl;
+}
+
+int Model::getPlayerScore() {
+    return playerScore;
+}
+int Model::getDealerScore() {
+    return dealerScore;
+}
+int Model::getTotalMoney() {
+    return totalMoney;
 }
