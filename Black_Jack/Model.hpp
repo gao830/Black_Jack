@@ -21,6 +21,7 @@ class Model {
 	int playerHand[10];
 	int dealerHand[10];
 	int totalMoney = 100;
+	int betAmount = 0;
 	int playerHandSize = 0;
 	int dealerHandSize = 0;
 	int playerScore = 0;
@@ -42,6 +43,7 @@ class Model {
 	int getPlayerScore();
 	int getDealerScore();
 	int getTotalMoney();
+	void setBetAmount();
 };
 
 #endif /* Model_hpp */

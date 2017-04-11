@@ -254,3 +254,11 @@ int Model::getDealerScore() {
 int Model::getTotalMoney() {
 	return totalMoney;
 }
+
+void Model::setBetAmount() {
+	int bet = 0;
+	cout << "Input the amount you wish to bet: " << endl;
+	cin >> bet;
+	betAmount = bet;
+	cout << "The amount you chose to bet was: " << betAmount << endl;
+}
