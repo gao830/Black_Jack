@@ -42,7 +42,7 @@ string Model::drawCard(int currentPlayer) {
             faceCard = "K";
             break;
         case 14:
-            faceCard = "K";
+            faceCard = "A";
             break;
         default:
             ostringstream convert;
@@ -205,6 +205,8 @@ void Model::playerTurn() {
 void Model::playRound() {
     int result;
     initDeck();
+    cout << "Total money: " << getTotalMoney() << endl;
+    setBetAmount();
     dealOpeningHands();
     
     while (!endGame) {

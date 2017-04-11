@@ -8,7 +8,13 @@ int main(int argc, const char * argv[]) {
 //    Controller controller(view);
 //    controller.startGame();
     srand(time(NULL));
+    int playGames = 1;
     Model model;
-    model.playRound();
+    
+    while(playGames == 1){
+        model.playRound();
+        cout << "Do you want to play it again? (1 for yes, 2 for no)" << endl;
+        cin >> playGames;
+    }
     return 0;
 }
