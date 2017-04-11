@@ -20,6 +20,7 @@ class Model {
 	int ** deck = NULL;
 	int playerHand[10];
 	int dealerHand[10];
+	int totalMoney = 100;
 	int playerHandSize = 0;
 	int dealerHandSize = 0;
 	int playerScore = 0;
@@ -37,7 +38,10 @@ class Model {
 	void playRound();
 	void updateScores();
 	string drawCard(int currentPlayer);
-	int determineWinner();
+	int determineWinner(int betAmount);
+	int getPlayerScore();
+	int getDealerScore();
+	int getTotalMoney();
 };
 
 #endif /* Model_hpp */

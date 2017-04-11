@@ -76,7 +76,7 @@ string Model::drawCard(int currentPlayer) {
 }
 
 //Returns 0 for draw, 1 for dealer win, 2 for player win
-int Model::determineWinner() {
+int Model::determineWinner(int betAmount) {
 	updateScores();
 
 	//player goes bust
@@ -93,9 +93,11 @@ int Model::determineWinner() {
 		return 0;
 	}
 	if(playerScore < dealerScore) {
+		totalMoney = totalMoney - betAmount;
 		return 1;
 	}
 	if(playerScore > dealerScore) {
+		totalMoney = totalMoney + betAmount;
 		return 2;
 	}
 }
@@ -128,6 +130,7 @@ void Model::updateScores() {
 			dealerScore += 11;
 		}
 	}
+
 }
 
 //initializes the opening hands
@@ -236,4 +239,14 @@ void Model::playRound() {
 	}
 
 	cout << "Dealer score: " << dealerScore << endl;
+}
+
+int Model::getPlayerScore() {
+	return playerScore;
+}
+int Model::getDealerScore() {
+	return dealerScore;
+}
+int Model::getTotalMoney() {
+	return totalMoney;
 }
