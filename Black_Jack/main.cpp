@@ -7,7 +7,7 @@ int main(int argc, const char * argv[]) {
 //    View view;
 //    Controller controller(view);
 //    controller.startGame();
-    srand(time(NULL));
+    srand(unsigned(time(NULL)));
     int playGames = 1;
     Model model;
     
