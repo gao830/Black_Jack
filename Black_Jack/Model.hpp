@@ -4,7 +4,7 @@
 #include <iostream>
 #include <time.h>
 #include <sstream>
-
+#include "Card.hpp"
 using namespace std;
 
 class Model {
@@ -26,6 +26,7 @@ class Model {
 	bool dealerStand = 0;
 	bool playerStand = 0;
 	string faceDownCard;
+    Card card_type;
 	//private:
 	void initDeck();
 	void dealOpeningHands();

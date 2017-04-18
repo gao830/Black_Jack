@@ -2,11 +2,12 @@
 #include "View.hpp"
 #include "Controller.hpp"
 #include "Model.hpp"
+#include "Card.hpp"
 using namespace std;
 int main(int argc, const char * argv[]) {
-//    View view;
-//    Controller controller(view);
-//    controller.startGame();
+    Card card;
+//    card.setCard("K", 3);
+//    card.displayCard();
     srand(unsigned(time(NULL)));
     int playGames = 1;
     Model model;

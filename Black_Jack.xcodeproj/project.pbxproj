@@ -11,6 +11,7 @@
 		FC5D9D091E9ABEC2009D3462 /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC5D9D071E9ABEC2009D3462 /* Model.cpp */; };
 		FC5D9D0C1E9ABED1009D3462 /* View.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC5D9D0A1E9ABED1009D3462 /* View.cpp */; };
 		FC5D9D0F1E9ABEDB009D3462 /* Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC5D9D0D1E9ABEDB009D3462 /* Controller.cpp */; };
+		FCFFC8071EA5A20900DB3770 /* Card.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCFFC8051EA5A20900DB3770 /* Card.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +35,8 @@
 		FC5D9D0B1E9ABED1009D3462 /* View.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = View.hpp; sourceTree = "<group>"; };
 		FC5D9D0D1E9ABEDB009D3462 /* Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Controller.cpp; sourceTree = "<group>"; };
 		FC5D9D0E1E9ABEDB009D3462 /* Controller.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Controller.hpp; sourceTree = "<group>"; };
+		FCFFC8051EA5A20900DB3770 /* Card.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Card.cpp; sourceTree = "<group>"; };
+		FCFFC8061EA5A20900DB3770 /* Card.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Card.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +76,8 @@
 				FC5D9D0A1E9ABED1009D3462 /* View.cpp */,
 				FC5D9D0E1E9ABEDB009D3462 /* Controller.hpp */,
 				FC5D9D0D1E9ABEDB009D3462 /* Controller.cpp */,
+				FCFFC8061EA5A20900DB3770 /* Card.hpp */,
+				FCFFC8051EA5A20900DB3770 /* Card.cpp */,
 			);
 			path = Black_Jack;
 			sourceTree = "<group>";
@@ -139,6 +144,7 @@
 				FC5D9D011E9ABD29009D3462 /* main.cpp in Sources */,
 				FC5D9D091E9ABEC2009D3462 /* Model.cpp in Sources */,
 				FC5D9D0F1E9ABEDB009D3462 /* Controller.cpp in Sources */,
+				FCFFC8071EA5A20900DB3770 /* Card.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +275,7 @@
 				FC5D9D061E9ABD29009D3462 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

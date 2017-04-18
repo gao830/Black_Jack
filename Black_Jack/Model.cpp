@@ -64,6 +64,10 @@ string Model::drawCard(int currentPlayer) {
             break;
             
     }
+    if(faceCard == "T"){
+        faceCard = "10";
+    }
+    card_type.setCard(faceCard, suit);
     return cardDrawn;
 }
 
@@ -133,15 +137,21 @@ void Model::dealOpeningHands() {
     string displayMe;
     for (int i = 0; i < numPlayers; i++) {
         displayMe = drawCard(1);
+        card_type.displayCard();
         cout << "You're dealt " << displayMe << endl;
+        cout << endl;
     }
     
     displayMe = drawCard(0);
+    card_type.displayCard();
     cout << "Dealer draws " << displayMe << endl;
+    cout << endl;
     
     for (int i = 0; i < numPlayers; i++) {
         displayMe = drawCard(1);
+        card_type.displayCard();
         cout << "You're dealt " << displayMe << endl;
+        cout << endl;
     }
     
     faceDownCard = drawCard(0);
@@ -163,7 +173,9 @@ void Model::dealerTurn() {
     else if(dealerScore <= 16) {
         cout << "Dealer hits." << endl;
         displayMe = drawCard(0);
+        card_type.displayCard();
         cout << "Dealer draws " << displayMe << endl;
+        cout << endl;
         updateScores();
     }
     else {
@@ -198,7 +210,9 @@ void Model::playerTurn() {
             break;
         case 'h':
             displayMe = drawCard(1);
+            card_type.displayCard();
             cout << "You're dealt " << displayMe << endl;
+            cout << endl;
             break;
     }
 }
