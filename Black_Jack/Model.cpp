@@ -208,6 +208,9 @@ void Model::playRound() {
     int result;
     initDeck();
     cout << "Total money: " << getTotalMoney() << endl;
+    cout << "Scoreboard: " << getWinTimes() << " - " << getLoseTimes() << endl;
+    cout << "Balance: " << getTotalMoney() - 100 << endl;
+    
     setBetAmount();
     dealOpeningHands();
     
@@ -231,9 +234,11 @@ void Model::playRound() {
     }
     else if (result == 1) {
         cout << "Dealer wins!" << endl;
+        lose++;
     }
     else if (result == 2) {
         cout << "Player wins!" << endl;
+        win++;
     }
     
     cout << "Dealer score: " << dealerScore << endl;
@@ -247,6 +252,14 @@ int Model::getDealerScore() {
 }
 int Model::getTotalMoney() {
     return totalMoney;
+}
+
+int Model::getWinTimes() {
+    return win;
+}
+
+int Model::getLoseTimes() {
+    return lose;
 }
 
 void Model::setBetAmount() {

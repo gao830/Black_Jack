@@ -20,6 +20,8 @@ class Model {
 	int playerScore = 0;
 	int dealerScore = 0;
 	int numPlayers = 1;
+    int lose = 0;
+    int win = 0;
 	bool endGame = 0;
 	bool dealerStand = 0;
 	bool playerStand = 0;
@@ -36,6 +38,8 @@ class Model {
 	int getPlayerScore();
 	int getDealerScore();
 	int getTotalMoney();
+    int getLoseTimes();
+    int getWinTimes();
 	void setBetAmount();
     void clear();
 };
