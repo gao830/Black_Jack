@@ -388,11 +388,12 @@ void Model::splitCards() {
 void Model::playerSplitTurn() {
     cout << endl;
     cout << "Your turn!" << endl;
-    cout<<"test2" << endl;
+   
     updateScores();
     cout << "Your total: " << playerSplitScore << endl;
     
     if (playerSplitScore >= 21) {
+		playerSplitStand = true;
         return;
     }
     
