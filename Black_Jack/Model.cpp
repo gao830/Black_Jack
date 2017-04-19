@@ -140,7 +140,7 @@ int Model::determineWinner(int betAmount) {
 void Model::updateScores() {
     playerScore = 0;
     dealerScore = 0;
-    
+    playerSplitScore = 0;
     for (int i = 0; i < playerHandSize; i++) {
         if (playerHand[i] < 11) {
             playerScore += playerHand[i];
@@ -274,6 +274,7 @@ void Model::playerTurn() {
 			break;
 		case '?':
 			giveHint();
+            actionTaken = true;
 			break;
 		case 'x':
 		    split = 1;
@@ -421,6 +422,7 @@ void Model::playerSplitTurn() {
 			break;
 		case '?':
 			giveHint();
+            actionSplitTaken = true;
 			break;
 		case 'x':
 			splitCards();
