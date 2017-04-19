@@ -15,16 +15,24 @@ void Model::initDeck() {
 void Model::giveHint() {
 	updateScores();
 	if (playerScore <= 15) {
+		cout << endl;
 		cout << "You should hit." << endl;
+		cout << endl;
 	}
 	else if (playerScore >= 18) {
+		cout << endl;
 		cout << "You should stand." << endl;
+		cout << endl;
 	}
 	else if (dealerScore >= 17) {
+		cout << endl;
 		cout << "You should hit." << endl;
+		cout << endl;
 	}
 	else if (dealerScore <= 17) {
+		cout << endl;
 		cout << "You should stand." << endl;
+		cout << endl;
 	}
 }
 
@@ -67,16 +75,16 @@ string Model::drawCard(int currentPlayer) {
     }
     switch (suit) {
         case 0:
-            cardDrawn = "Heart: " + faceCard;
+            cardDrawn = faceCard + " of Hearts.";
             break;
         case 1:
-            cardDrawn = "Diamond: " + faceCard;
+            cardDrawn = faceCard + " of Diamonds.";
             break;
         case 2:
-            cardDrawn = "Spade: " + faceCard;
+            cardDrawn = faceCard + " of Spades.";
             break;
         case 3:
-            cardDrawn =  "Clubs: " + faceCard;
+            cardDrawn = faceCard + " of Clubs.";
             break;
             
     }
