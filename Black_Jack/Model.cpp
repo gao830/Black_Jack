@@ -44,7 +44,7 @@ string Model::drawCard(int currentPlayer) {
         playerHandSize++;
 		if(playerHandSize == 2) {
 			if(playerHand[0] == playerHand[1]) {
-				split = 1;
+				splitAbility = 1;
 			}
 		}
     }
@@ -254,7 +254,7 @@ void Model::playerTurn() {
     string displayMe;
     
     cout << "Type s to stand, h to hit, or ? for a hint." << endl;
-	if(split == 1) {
+	if(splitAbility == 1) {
 		cout << "Type x to split." << endl;
 	}
     cin >> action;
@@ -276,6 +276,7 @@ void Model::playerTurn() {
 			giveHint();
 			break;
 		case 'x':
+		    split = 1;
 			splitCards();
 			actionTaken = true;
 			break;
@@ -365,6 +366,7 @@ void Model::clear() {
 	playerSplitScore = 0;
     numPlayers = 1;
 	split = 0;
+	splitAbility = 0;
     endGame = 0;
     dealerStand = 0;
     playerStand = 0;
@@ -378,7 +380,7 @@ void Model::splitCards() {
 	playerHandSize--;
 	playerSplitHandSize++;
 	drawCard(2);
-	while (playerSplitStand == false) {
+	while (!playerSplitStand) {
 		playerSplitTurn();
 	}
 }
@@ -386,7 +388,7 @@ void Model::splitCards() {
 void Model::playerSplitTurn() {
     cout << endl;
     cout << "Your turn!" << endl;
-    
+    cout<<"test2" << endl;
     updateScores();
     cout << "Your total: " << playerSplitScore << endl;
     

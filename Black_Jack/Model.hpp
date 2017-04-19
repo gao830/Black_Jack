@@ -26,10 +26,11 @@ class Model {
     int lose = 0;
     int win = 0;
 	int split = 0;
+	int splitAbility = 1;
 	bool endGame = 0;
 	bool dealerStand = 0;
 	bool playerStand = 0;
-	bool playerSplitStand = 0;
+	bool playerSplitStand = false;
 	string faceDownCard;
     Card card_type;
 	//private:
