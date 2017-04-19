@@ -29,6 +29,7 @@ class Model {
     Card card_type;
 	//private:
 	void initDeck();
+	void giveHint();
 	void dealOpeningHands();
 	void dealerTurn();
 	void playerTurn();

@@ -10,8 +10,7 @@ void View::greeting() {
 }
 
 void View::promptForHoldOrHit() {
-    cout << "Do you want to hold or hit? (1 for hold, 2 for hit)" << endl;
-    
+    cout << "Do you want to hold or hit? (1 for hold, 2 for hit)" << endl;    
     return;
 }
 

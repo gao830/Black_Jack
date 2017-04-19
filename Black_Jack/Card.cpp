@@ -33,8 +33,8 @@ void Card::setCard(string character, int suit) {
             
     }
     
-    card[0] = "┌─────────┐";
-    card[1] = "│" + character +"       │";
+	card[0] = "┌─────────┐";
+	card[1] = "│" + character + "       │";
     card[2] = "│         │";
     card[3] = "│         │";
     card[4] = "│    " + suit_type +"    │";

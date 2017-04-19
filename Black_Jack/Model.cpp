@@ -12,6 +12,22 @@ void Model::initDeck() {
     }
 }
 
+void Model::giveHint() {
+	updateScores();
+	if (playerScore <= 15) {
+		cout << "You should hit." << endl;
+	}
+	else if (playerScore >= 18) {
+		cout << "You should stand." << endl;
+	}
+	else if (dealerScore >= 17) {
+		cout << "You should hit." << endl;
+	}
+	else if (dealerScore <= 17) {
+		cout << "You should stand." << endl;
+	}
+}
+
 //currentPlayer = 0 for dealer and currentPlayer = 1 for player
 string Model::drawCard(int currentPlayer) {
     //need to implement a way to keep track of which cards have been drawn
@@ -199,22 +215,30 @@ void Model::playerTurn() {
     }
     
     char action;
+	bool actionTaken = false;
     string displayMe;
     
-    cout << "Type s to stand or h to hit." << endl;
+    cout << "Type s to stand, h to hit, or ? for a hint." << endl;
     cin >> action;
     
-    switch (action) {
-        case 's':
-            playerStand = true;
-            break;
-        case 'h':
-            displayMe = drawCard(1);
-            card_type.displayCard();
-            cout << "You're dealt " << displayMe << endl;
-            cout << endl;
-            break;
-    }
+	while (!actionTaken) {
+		switch (action) {
+		case 's':
+			playerStand = true;
+			actionTaken = true;
+			break;
+		case 'h':
+			displayMe = drawCard(1);
+			card_type.displayCard();
+			cout << "You're dealt " << displayMe << endl;
+			cout << endl;
+			actionTaken = true;
+			break;
+		case '?':
+			giveHint();
+			break;
+		}
+	}
 }
 
 //contains the loop for playing the game
