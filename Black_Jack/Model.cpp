@@ -15,34 +15,26 @@ void Model::initDeck() {
 void Model::giveHint() {
 	updateScores();
 	if (playerScore <= 15) {
-		cout << endl;
 		cout << "You should hit." << endl;
-		cout << endl;
 	}
 	else if (playerScore >= 18) {
-		cout << endl;
 		cout << "You should stand." << endl;
-		cout << endl;
 	}
 	else if (dealerScore >= 17) {
-		cout << endl;
 		cout << "You should hit." << endl;
-		cout << endl;
 	}
 	else if (dealerScore <= 17) {
-		cout << endl;
 		cout << "You should stand." << endl;
-		cout << endl;
 	}
 }
 
-//currentPlayer = 0 for dealer and currentPlayer = 1 for player
+//currentPlayer = 0 for dealer and currentPlayer = 1 for player and currentPlayer = 2 for split
 string Model::drawCard(int currentPlayer) {
     //need to implement a way to keep track of which cards have been drawn
     string cardDrawn;
     int suit = rand() % 4;
     int card = rand() % 13;
-    int chosenCard = deck[suit][card];
+    int chosenCard = deck[suit][4];
     if(currentPlayer == 0) {
         dealerHand[dealerHandSize] = chosenCard;
         dealerHandSize++;
@@ -50,7 +42,16 @@ string Model::drawCard(int currentPlayer) {
     if(currentPlayer == 1) {
         playerHand[playerHandSize] = chosenCard;
         playerHandSize++;
+		if(playerHandSize == 2) {
+			if(playerHand[0] == playerHand[1]) {
+				split = 1;
+			}
+		}
     }
+	if(currentPlayer == 2) {
+		playerSplitHand[playerSplitHandSize] = chosenCard;
+		playerSplitHandSize++;
+	}
     string faceCard;
     switch (chosenCard) {
         case 10:
@@ -75,16 +76,16 @@ string Model::drawCard(int currentPlayer) {
     }
     switch (suit) {
         case 0:
-            cardDrawn = faceCard + " of Hearts.";
+            cardDrawn = "Heart: " + faceCard;
             break;
         case 1:
-            cardDrawn = faceCard + " of Diamonds.";
+            cardDrawn = "Diamond: " + faceCard;
             break;
         case 2:
-            cardDrawn = faceCard + " of Spades.";
+            cardDrawn = "Spade: " + faceCard;
             break;
         case 3:
-            cardDrawn = faceCard + " of Clubs.";
+            cardDrawn =  "Clubs: " + faceCard;
             break;
             
     }
@@ -110,7 +111,18 @@ int Model::determineWinner(int betAmount) {
         totalMoney = totalMoney + betAmount;
         return 2;
     }
-    
+    if(split == 1) {
+		if(playerSplitScore == dealerScore) {
+ 
+		} else if(playerSplitScore < dealerScore) {
+			totalMoney = totalMoney - betAmount;
+			
+		} else {
+			totalMoney = totalMoney + betAmount;
+			
+		}
+	}
+	
     if(playerScore == dealerScore) {
         return 0;
     } else if(playerScore < dealerScore) {
@@ -120,6 +132,7 @@ int Model::determineWinner(int betAmount) {
         totalMoney = totalMoney + betAmount;
         return 2;
     }
+	
 }
 
 //updates the current scores
@@ -150,6 +163,20 @@ void Model::updateScores() {
             dealerScore += 11;
         }
     }
+	if(split == 1) {
+		for (int i = 0; i < playerSplitHandSize; i++) {
+			if (playerSplitHand[i] < 11) {
+				playerSplitScore += playerSplitHand[i];
+			}
+			if (playerSplitHand[i] > 10 && playerSplitHand[i] < 14) {
+				playerSplitScore += 10;
+			}
+			if (playerSplitHand[i] == 14) {
+				playerSplitScore += 11;
+			}
+		}
+	}
+	
     
 }
 
@@ -227,6 +254,9 @@ void Model::playerTurn() {
     string displayMe;
     
     cout << "Type s to stand, h to hit, or ? for a hint." << endl;
+	if(split == 1) {
+		cout << "Type x to split." << endl;
+	}
     cin >> action;
     
 	while (!actionTaken) {
@@ -244,6 +274,10 @@ void Model::playerTurn() {
 			break;
 		case '?':
 			giveHint();
+			break;
+		case 'x':
+			splitCards();
+			actionTaken = true;
 			break;
 		}
 	}
@@ -320,6 +354,7 @@ void Model::clear() {
     for (int i = 0; i < 9; i++){
         playerHand[i] = 0;
         dealerHand[i] = 0;
+		playerSplitHand[i] = 0;
     }
 
     betAmount = 0;
@@ -327,8 +362,67 @@ void Model::clear() {
     dealerHandSize = 0;
     playerScore = 0;
     dealerScore = 0;
+	playerSplitScore = 0;
     numPlayers = 1;
+	split = 0;
     endGame = 0;
     dealerStand = 0;
     playerStand = 0;
+	playerSplitHandSize = 0;
+	playerSplitStand = false;
+}
+
+void Model::splitCards() {
+	playerSplitHand[0] = playerHand[1];
+	playerHand[1] = 0;
+	playerHandSize--;
+	playerSplitHandSize++;
+	drawCard(2);
+	while (playerSplitStand == false) {
+		playerSplitTurn();
+	}
+}
+
+void Model::playerSplitTurn() {
+    cout << endl;
+    cout << "Your turn!" << endl;
+    
+    updateScores();
+    cout << "Your total: " << playerSplitScore << endl;
+    
+    if (playerSplitScore >= 21) {
+        return;
+    }
+    
+    char action;
+	bool actionSplitTaken = false;
+    string displayMe;
+    
+	cout << "Split Hand" << endl;
+    cout << "Type s to stand, h to hit, or ? for a hint." << endl;
+	
+    cin >> action;
+    
+	while (!actionSplitTaken) {
+		switch (action) {
+		case 's':
+			playerSplitStand = true;
+			actionSplitTaken = true;
+			break;
+		case 'h':
+			displayMe = drawCard(2);
+			card_type.displayCard();
+			cout << "You're dealt " << displayMe << endl;
+			cout << endl;
+			actionSplitTaken = true;
+			break;
+		case '?':
+			giveHint();
+			break;
+		case 'x':
+			splitCards();
+			actionSplitTaken = true;
+			break;
+		}
+	}
 }
