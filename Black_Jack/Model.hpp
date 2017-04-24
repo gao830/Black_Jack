@@ -34,6 +34,7 @@ class Model {
 	bool dealerStand = 0;
 	bool playerStand = 0;
 	bool playerAIStand[4];
+	bool playerAIBust[4];
 	bool playerSplitStand = false;
 	string faceDownCard;
     Card card_type;
@@ -44,7 +45,7 @@ class Model {
 	void dealOpeningHands();
 	void dealerTurn();
 	void playerTurn();
-	void playerAITurn();
+	void playerAITurn(int currentPlayer);
 	void playRound();
 	void updateScores();
 	string drawCard(int currentPlayer);

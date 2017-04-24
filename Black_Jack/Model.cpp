@@ -162,6 +162,10 @@ void Model::updateScores() {
     playerScore = 0;
     dealerScore = 0;
     playerSplitScore = 0;
+	for (int i = 0; i < numPlayers; i++) {
+		playerAIScore[i] = 0;
+	}
+
     for (int i = 0; i < playerHandSize; i++) {
         if (playerHand[i] < 11) {
             playerScore += playerHand[i];
@@ -225,32 +229,30 @@ void Model::dealOpeningHands() {
     string displayMe;
 
 	displayMe = drawCard(1);
-	card_type.displayCard();
+	//card_type.displayCard();
 	cout << "You're dealt " << displayMe << endl;
 	cout << endl;
 
     for (int i = 0; i < numPlayers; i++) {
-		cout << "test" << endl;
 		displayMe = drawCard(i + 3);
-		cout << "test" << endl;
-		card_type.displayCard();
+		//card_type.displayCard();
 		cout << "COM" << i << " was dealt " << displayMe << endl;
 		cout << endl;
     }
     
     displayMe = drawCard(0);
-    card_type.displayCard();
+    //card_type.displayCard();
     cout << "Dealer draws " << displayMe << endl;
     cout << endl;
 
 	displayMe = drawCard(1);
-	card_type.displayCard();
+	//card_type.displayCard();
 	cout << "You're dealt " << displayMe << endl;
 	cout << endl;
     
     for (int i = 0; i < numPlayers; i++) {
 		displayMe = drawCard(i + 3);
-		card_type.displayCard();
+		//card_type.displayCard();
 		cout << "COM" << i << " was dealt " << displayMe << endl;
 		cout << endl;
     }
@@ -274,7 +276,7 @@ void Model::dealerTurn() {
     else if(dealerScore <= 16) {
         cout << "Dealer hits." << endl;
         displayMe = drawCard(0);
-        card_type.displayCard();
+        //card_type.displayCard();
         cout << "Dealer draws " << displayMe << endl;
         cout << endl;
         updateScores();
@@ -317,7 +319,7 @@ void Model::playerTurn() {
 			break;
 		case 'h':
 			displayMe = drawCard(1);
-			card_type.displayCard();
+			//card_type.displayCard();
 			cout << "You're dealt " << displayMe << endl;
 			cout << endl;
 			actionTaken = true;
@@ -335,72 +337,72 @@ void Model::playerTurn() {
 	}
 }
 
-void Model::playerAITurn() {
+void Model::playerAITurn(int currentPlayer) {
 	updateScores();
 	string displayMe;
-	for (int i = 0; i < numPlayers; i++) {
+	//for (int i = 0; i < numPlayers; i++) {
 
-		cout << "COM" << i << "'s turn!" << endl;
+		cout << "COM" << currentPlayer << "'s turn!" << endl;
 
 		//aggressive
-		if (i % 2 == 0) {
-			cout << "COM" << i << " hits." << endl;
-			displayMe = drawCard(i + 3);
-			card_type.displayCard();
-			cout << "COM" << i << " draws " << displayMe << endl;
+		if (currentPlayer % 2 == 0) {
+			cout << "COM" << currentPlayer << " hits." << endl;
+			displayMe = drawCard(currentPlayer + 3);
+			//card_type.displayCard();
+			cout << "COM" << currentPlayer << " draws " << displayMe << endl;
 			cout << endl;
 			updateScores();
-			if (playerAIScore[i] > 21) {
-				cout << "COM" << i << " went bust!" << endl;
-				playerAIStand[i] = true;
+			if (playerAIScore[currentPlayer] > 21) {
+				cout << "COM" << currentPlayer << " went bust!" << endl;
+				playerAIBust[currentPlayer] = true;
 			}
 		}
 
 		//reasonable
 		else {
-			if (playerAIScore[i] <= 15) {
-				cout << "COM" << i << " hits." << endl;
-				displayMe = drawCard(i + 3);
-				card_type.displayCard();
-				cout << "COM" << i << " draws " << displayMe << endl;
+			if (playerAIScore[currentPlayer] <= 15) {
+				cout << "COM" << currentPlayer << " hits." << endl;
+				displayMe = drawCard(currentPlayer + 3);
+				//card_type.displayCard();
+				cout << "COM" << currentPlayer << " draws " << displayMe << endl;
 				cout << endl;
 				updateScores();
-				if (playerAIScore[i] > 21) {
-					cout << "COM" << i << " went bust!" << endl;
-					cout << playerAIScore[i] << endl;
-					playerAIStand[i] = true;
+				if (playerAIScore[currentPlayer] > 21) {
+					cout << "COM" << currentPlayer << " went bust!" << endl;
+					cout << playerAIScore[currentPlayer] << endl;
+					playerAIBust[currentPlayer] = true;
 				}
 			}
-			else if (playerAIScore[i] >= 18) {
-				cout << "COM" << i << " stands." << endl;
-				playerAIStand[i] = 1;
+			else if (playerAIScore[currentPlayer] >= 18) {
+				cout << "COM" << currentPlayer << " stands." << endl;
+				playerAIStand[currentPlayer] = 1;
 			}
 			else if (dealerScore >= 17) {
-				cout << "COM" << i << " hits." << endl;
-				displayMe = drawCard(i + 3);
-				card_type.displayCard();
-				cout << "COM" << i << " draws " << displayMe << endl;
+				cout << "COM" << currentPlayer << " hits." << endl;
+				displayMe = drawCard(currentPlayer + 3);
+				//card_type.displayCard();
+				cout << "COM" << currentPlayer << " draws " << displayMe << endl;
 				cout << endl;
 				updateScores();
-				if (playerAIScore[i] > 21) {
-					cout << "COM" << i << " went bust!" << endl;
-					playerAIStand[i] = true;
+				if (playerAIScore[currentPlayer] > 21) {
+					cout << "COM" << currentPlayer << " went bust!" << endl;
+					playerAIBust[currentPlayer] = true;
 				}
 			}
 			else if (dealerScore <= 17) {
-				cout << "COM" << i << " stands." << endl;
-				playerAIStand[i] = 1;
+				cout << "COM" << currentPlayer << " stands." << endl;
+				playerAIStand[currentPlayer] = 1;
 			}
 		}
-	}
+	//}
 }
 
 //contains the loop for playing the game
 void Model::playRound() {
     int result;
-	bool turnsOver = false;
     initDeck();
 	initAIHands();
+
     cout << "Total money: " << getTotalMoney() << endl;
     cout << "Scoreboard: " << getWinTimes() << " - " << getLoseTimes() << endl;
     cout << "Balance: " << getTotalMoney() - 100 << endl;
@@ -415,19 +417,16 @@ void Model::playRound() {
 
 		//after the player stands, the ai take turns
         if(playerStand) {
-			playerAITurn();
-			turnsOver = true;
 			
 			//keep going until each ai player has stood
 			for (int i = 0; i < numPlayers; i++) {
-				if (!playerAIStand[i]) {
-					turnsOver = false;
+				while (!playerAIBust[i] && !playerAIStand[i]) {
+					playerAITurn(i);
+					//cout << playerAIScore[i] << endl;
 				}
 			}
 
-			if (turnsOver) {
-				dealerTurn();
-			}
+			dealerTurn();
         }
         if (dealerStand && playerStand) {
             endGame = true;
@@ -491,12 +490,15 @@ void Model::clear() {
     playerScore = 0;
     dealerScore = 0;
 	playerSplitScore = 0;
-    numPlayers = 1;
 	split = 0;
 	splitAbility = 0;
     endGame = 0;
     dealerStand = 0;
     playerStand = 0;
+	for (int i = 0; i < numPlayers; i++) {
+		playerAIBust[i] = false;
+		playerAIStand[i] = false;
+	}
 	playerSplitHandSize = 0;
 	playerSplitStand = false;
 }
@@ -541,7 +543,7 @@ void Model::playerSplitTurn() {
 			break;
 		case 'h':
 			displayMe = drawCard(2);
-			card_type.displayCard();
+			//card_type.displayCard();
 			cout << "You're dealt " << displayMe << endl;
 			cout << endl;
 			actionSplitTaken = true;
