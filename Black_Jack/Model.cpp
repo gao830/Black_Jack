@@ -68,14 +68,9 @@ string Model::drawCard(int currentPlayer) {
 	}
 	if(currentPlayer > 2 && currentPlayer < numPlayers + 3) {
 		for (int i = 0; i < 10; i++) {
-			if (playerAIHands[currentPlayer][i] == 0) {
-				playerAIHands[currentPlayer][i] = chosenCard;
-				playerAIHandSize[currentPlayer]++;
-			}
-			else {
-				cout << "AI number " << currentPlayer - 2 << " has a full hand! (10 cards)" << endl;
-			}
+			playerAIHands[currentPlayer - 3][i] = chosenCard;
 		}
+		playerAIHandSize[currentPlayer - 3]++;
 	}
     string faceCard;
     switch (chosenCard) {
@@ -235,7 +230,9 @@ void Model::dealOpeningHands() {
 	cout << endl;
 
     for (int i = 0; i < numPlayers; i++) {
+		cout << "test" << endl;
 		displayMe = drawCard(i + 3);
+		cout << "test" << endl;
 		card_type.displayCard();
 		cout << "COM" << i << " was dealt " << displayMe << endl;
 		cout << endl;
@@ -353,6 +350,10 @@ void Model::playerAITurn() {
 			cout << "COM" << i << " draws " << displayMe << endl;
 			cout << endl;
 			updateScores();
+			if (playerAIScore[i] > 21) {
+				cout << "COM" << i << " went bust!" << endl;
+				playerAIStand[i] = true;
+			}
 		}
 
 		//reasonable
@@ -364,6 +365,11 @@ void Model::playerAITurn() {
 				cout << "COM" << i << " draws " << displayMe << endl;
 				cout << endl;
 				updateScores();
+				if (playerAIScore[i] > 21) {
+					cout << "COM" << i << " went bust!" << endl;
+					cout << playerAIScore[i] << endl;
+					playerAIStand[i] = true;
+				}
 			}
 			else if (playerAIScore[i] >= 18) {
 				cout << "COM" << i << " stands." << endl;
@@ -376,6 +382,10 @@ void Model::playerAITurn() {
 				cout << "COM" << i << " draws " << displayMe << endl;
 				cout << endl;
 				updateScores();
+				if (playerAIScore[i] > 21) {
+					cout << "COM" << i << " went bust!" << endl;
+					playerAIStand[i] = true;
+				}
 			}
 			else if (dealerScore <= 17) {
 				cout << "COM" << i << " stands." << endl;
@@ -388,7 +398,9 @@ void Model::playerAITurn() {
 //contains the loop for playing the game
 void Model::playRound() {
     int result;
+	bool turnsOver = false;
     initDeck();
+	initAIHands();
     cout << "Total money: " << getTotalMoney() << endl;
     cout << "Scoreboard: " << getWinTimes() << " - " << getLoseTimes() << endl;
     cout << "Balance: " << getTotalMoney() - 100 << endl;
@@ -401,10 +413,21 @@ void Model::playRound() {
 			playerTurn();
 		}
 
-		playerAITurn();
-
+		//after the player stands, the ai take turns
         if(playerStand) {
-            dealerTurn();
+			playerAITurn();
+			turnsOver = true;
+			
+			//keep going until each ai player has stood
+			for (int i = 0; i < numPlayers; i++) {
+				if (!playerAIStand[i]) {
+					turnsOver = false;
+				}
+			}
+
+			if (turnsOver) {
+				dealerTurn();
+			}
         }
         if (dealerStand && playerStand) {
             endGame = true;
