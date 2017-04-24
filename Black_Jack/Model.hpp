@@ -11,6 +11,8 @@ class Model {
 
 	public:
 	int ** deck = NULL;
+	int ** playerAIHands;
+	int playerAIHandSize[4];
 	int playerHand[10];
 	int playerSplitHand[10];
 	int dealerHand[10];
@@ -22,7 +24,8 @@ class Model {
 	int playerScore = 0;
 	int dealerScore = 0;
 	int playerSplitScore = 0;
-	int numPlayers = 1;
+	int playerAIScore[4];
+	int numPlayers = 4;
     int lose = 0;
     int win = 0;
 	int split = 0;
@@ -30,15 +33,18 @@ class Model {
 	bool endGame = 0;
 	bool dealerStand = 0;
 	bool playerStand = 0;
+	bool playerAIStand[4];
 	bool playerSplitStand = false;
 	string faceDownCard;
     Card card_type;
 	//private:
 	void initDeck();
+	void initAIHands();
 	void giveHint();
 	void dealOpeningHands();
 	void dealerTurn();
 	void playerTurn();
+	void playerAITurn();
 	void playRound();
 	void updateScores();
 	string drawCard(int currentPlayer);
