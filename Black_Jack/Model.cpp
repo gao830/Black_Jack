@@ -229,30 +229,30 @@ void Model::dealOpeningHands() {
     string displayMe;
 
 	displayMe = drawCard(1);
-	//card_type.displayCard();
+	card_type.displayCard();
 	cout << "You're dealt " << displayMe << endl;
 	cout << endl;
 
     for (int i = 0; i < numPlayers; i++) {
 		displayMe = drawCard(i + 3);
-		//card_type.displayCard();
+		card_type.displayCard();
 		cout << "COM" << i << " was dealt " << displayMe << endl;
 		cout << endl;
     }
     
     displayMe = drawCard(0);
-    //card_type.displayCard();
+    card_type.displayCard();
     cout << "Dealer draws " << displayMe << endl;
     cout << endl;
 
 	displayMe = drawCard(1);
-	//card_type.displayCard();
+	card_type.displayCard();
 	cout << "You're dealt " << displayMe << endl;
 	cout << endl;
     
     for (int i = 0; i < numPlayers; i++) {
 		displayMe = drawCard(i + 3);
-		//card_type.displayCard();
+		card_type.displayCard();
 		cout << "COM" << i << " was dealt " << displayMe << endl;
 		cout << endl;
     }
@@ -276,7 +276,7 @@ void Model::dealerTurn() {
     else if(dealerScore <= 16) {
         cout << "Dealer hits." << endl;
         displayMe = drawCard(0);
-        //card_type.displayCard();
+        card_type.displayCard();
         cout << "Dealer draws " << displayMe << endl;
         cout << endl;
         updateScores();
@@ -319,7 +319,7 @@ void Model::playerTurn() {
 			break;
 		case 'h':
 			displayMe = drawCard(1);
-			//card_type.displayCard();
+			card_type.displayCard();
 			cout << "You're dealt " << displayMe << endl;
 			cout << endl;
 			actionTaken = true;
@@ -348,7 +348,7 @@ void Model::playerAITurn(int currentPlayer) {
 		if (currentPlayer % 2 == 0) {
 			cout << "COM" << currentPlayer << " hits." << endl;
 			displayMe = drawCard(currentPlayer + 3);
-			//card_type.displayCard();
+			card_type.displayCard();
 			cout << "COM" << currentPlayer << " draws " << displayMe << endl;
 			cout << endl;
 			updateScores();
@@ -363,7 +363,7 @@ void Model::playerAITurn(int currentPlayer) {
 			if (playerAIScore[currentPlayer] <= 15) {
 				cout << "COM" << currentPlayer << " hits." << endl;
 				displayMe = drawCard(currentPlayer + 3);
-				//card_type.displayCard();
+				card_type.displayCard();
 				cout << "COM" << currentPlayer << " draws " << displayMe << endl;
 				cout << endl;
 				updateScores();
@@ -380,7 +380,7 @@ void Model::playerAITurn(int currentPlayer) {
 			else if (dealerScore >= 17) {
 				cout << "COM" << currentPlayer << " hits." << endl;
 				displayMe = drawCard(currentPlayer + 3);
-				//card_type.displayCard();
+				card_type.displayCard();
 				cout << "COM" << currentPlayer << " draws " << displayMe << endl;
 				cout << endl;
 				updateScores();
@@ -543,7 +543,7 @@ void Model::playerSplitTurn() {
 			break;
 		case 'h':
 			displayMe = drawCard(2);
-			//card_type.displayCard();
+			card_type.displayCard();
 			cout << "You're dealt " << displayMe << endl;
 			cout << endl;
 			actionSplitTaken = true;
