@@ -295,12 +295,72 @@ void Model::playerTurn() {
     
     updateScores();
     cout << "Your total: " << playerScore << endl;
-    
+    cout << playerAIScore[0] << endl;
+    cout << playerAIScore[1] << endl;
+    cout << playerAIScore[2] << endl;
+    cout << playerAIScore[3] << endl;
+
     if (playerScore >= 21) {
         endGame = true;
         return;
     }
+    cout<<"┌";
+    for(int j=0; j<7; j++){
+        for(int i=0; i<12; i++){
+            cout << "─";
+        }
+        cout << "┐";
+    }
+    cout << endl;
+    cout << "│            " <<"│   player   " <<"│   COM0     "<<"│   COM1     "
+    <<"│   COM2     "<<"│   COM3     "<<"│   Dealer   │"<<endl;
     
+    cout<<"│";
+    
+    for(int j=0; j<7; j++){
+        for(int i=0; i<12; i++){
+            cout << "─";
+        }
+        cout << "│";
+    }
+    
+    cout << endl;
+    cout << "│ 1st dealt  " <<"│   player   " <<"│   COM0     "<<"│   COM1     "
+    <<"│   COM2     "<<"│   COM3     "<<"│   Dealer   │"<<endl;
+    cout<<"│";
+    
+    for(int j=0; j<7; j++){
+        for(int i=0; i<12; i++){
+            cout << "─";
+        }
+        cout << "│";
+    }
+    cout << endl;
+    cout << "│ 2nd dealt  " <<"│   player   " <<"│   COM0     "<<"│   COM1     "
+    <<"│   COM2     "<<"│   COM3     "<<"│   Dealer   │"<<endl;
+    cout<<"│";
+    for(int j=0; j<7; j++){
+        for(int i=0; i<12; i++){
+            cout << "─";
+        }
+        cout << "│";
+    }
+    cout << endl;
+    cout << "│   Total    " <<"│   player   " <<"│   COM0     "<<"│   COM1     "
+    <<"│   COM2     "<<"│   COM3     "<<"│   Dealer   │"<<endl;
+     cout<<"└";
+    for(int j=0; j<7; j++){
+        for(int i=0; i<12; i++){
+            cout << "─";
+        }
+        cout << "┘";
+    }
+
+    cout<<endl;
+//    for(int i=0; i<9; i++){
+//        cout << "│\t\t│\t\t│\t\t│\t\t│\t\t│" << endl;
+//    }
+//    cout<<endl;
     char action;
 	bool actionTaken = false;
     string displayMe;
