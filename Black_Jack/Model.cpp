@@ -299,9 +299,7 @@ void Model::playerTurn() {
 //    cout << playerAIScore[1] << endl;
 //    cout << playerAIScore[2] << endl;
 //    cout << playerAIScore[3] << endl;
-    if (chartNum2==1){
-        chart2();
-    }
+    
     
     if (playerScore >= 21) {
         endGame = true;
@@ -450,6 +448,9 @@ void Model::playRound() {
     }
     
     updateScores();
+    if (chartNum2==1){
+        chart2();
+    }
     result = determineWinner(betAmount);
     
     if (result == 0) {
