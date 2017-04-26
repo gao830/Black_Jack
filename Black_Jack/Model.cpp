@@ -632,7 +632,7 @@ void Model::playerSplitTurn() {
     char action;
 	bool actionSplitTaken = false;
     string displayMe;
-    
+        
 	cout << "Split Hand" << endl;
     cout << "Type s to stand, h to hit, or ? for a hint." << endl;
 	
