@@ -37,6 +37,8 @@ class Model {
 	bool playerAIStand[4];
 	bool playerAIBust[4];
 	bool playerSplitStand = false;
+	bool threeOfAKind = false;
+	bool threeInARow = false;
 	string faceDownCard;
     Card card_type;
 	//private:
