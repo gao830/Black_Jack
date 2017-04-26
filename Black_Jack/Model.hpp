@@ -31,6 +31,7 @@ class Model {
 	int split = 0;
 	int splitAbility = 1;
     int chartNum = 1;
+    int chartNum2 = 0;
 	bool endGame = 0;
 	bool dealerStand = 0;
 	bool playerStand = 0;
@@ -63,6 +64,7 @@ class Model {
 	void splitCards();
     void playerSplitTurn();
     void chart();
+    void chart2();
 	void pokerGame();
 };
 
