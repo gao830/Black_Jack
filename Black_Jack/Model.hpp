@@ -59,6 +59,7 @@ class Model {
     void clear();
 	void splitCards();
     void playerSplitTurn();
+	void pokerGame();
 };
 
 #endif /* Model_hpp */

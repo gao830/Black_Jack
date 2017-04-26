@@ -559,3 +559,52 @@ void Model::playerSplitTurn() {
 		}
 	}
 }
+
+void Model::pokerGame() {
+	//flush
+	
+	//3 in a row
+	if(playerHand[0]+1 == playerHand[1]) {
+		if(playerHand[0]+2 == dealerHand[0]) {
+			threeInARow = true;
+		}
+	}
+	if(playerHand[0]+1 == dealerHand[0]) {
+		if(playerHand[0]+1 == playerHand[1]) {
+			threeInARow = true;	
+		}
+	}
+	if(playerHand[1]+1 == playerHand[0]) {
+		if(playerHand[1]+1 == dealerHand[1]) {
+			threeInARow = true;
+		}
+	}
+	if(playerHand[1]+1 == dealerHand[0]) {
+		if(playerHand[1]+1 == playerHand[0]) {
+			threeInARow = true;
+		}
+	}
+	if(dealerHand[0]+1 == playerHand[0]) {
+		if(dealerHand[0]+1 == playerHand[1]) {
+			threeInARow = true;
+		}
+	}
+	if(dealerHAnd[0]+1 == playerHand[1]) {
+		if(dealerHand[0]+1 == playerHand[0]) {
+			threeInARow = true;
+		}
+	}
+	//3 of a kind
+	if(playerHand[0] == playerHand[1] && playerHand[0] == dealerHand[0]) {
+		threeOfAKind = true;
+	}
+	
+	if(threeInARow) {
+		cout << "Congrats you have three in a row. You win 50 points."
+		totalMoney += 50;
+	}
+	if(threeOfAKind) {
+		cout << "Congrats you have three of a kind. You win 100 points."
+		totalMoney += 100;
+	}
+}
