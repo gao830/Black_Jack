@@ -30,6 +30,7 @@ class Model {
     int win = 0;
 	int split = 0;
 	int splitAbility = 1;
+    int chartNum = 1;
 	bool endGame = 0;
 	bool dealerStand = 0;
 	bool playerStand = 0;
@@ -59,6 +60,7 @@ class Model {
     void clear();
 	void splitCards();
     void playerSplitTurn();
+    void chart();
 };
 
 #endif /* Model_hpp */

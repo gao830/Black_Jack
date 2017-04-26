@@ -295,72 +295,24 @@ void Model::playerTurn() {
     
     updateScores();
     cout << "Your total: " << playerScore << endl;
-    cout << playerAIScore[0] << endl;
-    cout << playerAIScore[1] << endl;
-    cout << playerAIScore[2] << endl;
-    cout << playerAIScore[3] << endl;
+//    cout << playerHand[0] << endl;
+//    cout << playerAIScore[1] << endl;
+//    cout << playerAIScore[2] << endl;
+//    cout << playerAIScore[3] << endl;
 
     if (playerScore >= 21) {
         endGame = true;
         return;
     }
-    cout<<"┌";
-    for(int j=0; j<7; j++){
-        for(int i=0; i<12; i++){
-            cout << "─";
-        }
-        cout << "┐";
-    }
-    cout << endl;
-    cout << "│            " <<"│   player   " <<"│   COM0     "<<"│   COM1     "
-    <<"│   COM2     "<<"│   COM3     "<<"│   Dealer   │"<<endl;
-    
-    cout<<"│";
-    
-    for(int j=0; j<7; j++){
-        for(int i=0; i<12; i++){
-            cout << "─";
-        }
-        cout << "│";
-    }
-    
-    cout << endl;
-    cout << "│ 1st dealt  " <<"│   player   " <<"│   COM0     "<<"│   COM1     "
-    <<"│   COM2     "<<"│   COM3     "<<"│   Dealer   │"<<endl;
-    cout<<"│";
-    
-    for(int j=0; j<7; j++){
-        for(int i=0; i<12; i++){
-            cout << "─";
-        }
-        cout << "│";
-    }
-    cout << endl;
-    cout << "│ 2nd dealt  " <<"│   player   " <<"│   COM0     "<<"│   COM1     "
-    <<"│   COM2     "<<"│   COM3     "<<"│   Dealer   │"<<endl;
-    cout<<"│";
-    for(int j=0; j<7; j++){
-        for(int i=0; i<12; i++){
-            cout << "─";
-        }
-        cout << "│";
-    }
-    cout << endl;
-    cout << "│   Total    " <<"│   player   " <<"│   COM0     "<<"│   COM1     "
-    <<"│   COM2     "<<"│   COM3     "<<"│   Dealer   │"<<endl;
-     cout<<"└";
-    for(int j=0; j<7; j++){
-        for(int i=0; i<12; i++){
-            cout << "─";
-        }
-        cout << "┘";
-    }
-
-    cout<<endl;
-//    for(int i=0; i<9; i++){
+    //    for(int i=0; i<9; i++){
 //        cout << "│\t\t│\t\t│\t\t│\t\t│\t\t│" << endl;
 //    }
 //    cout<<endl;
+    if(chartNum == 1) {
+        chart();
+        chartNum = 0;
+    }
+    
     char action;
 	bool actionTaken = false;
     string displayMe;
@@ -543,7 +495,7 @@ void Model::clear() {
         dealerHand[i] = 0;
 		playerSplitHand[i] = 0;
     }
-
+    chartNum = 1;
     betAmount = 0;
     playerHandSize = 0;
     dealerHandSize = 0;
@@ -572,6 +524,97 @@ void Model::splitCards() {
 	while (!playerSplitStand) {
 		playerSplitTurn();
 	}
+}
+
+
+void Model::chart() {
+    cout<<"┌";
+    for(int j=0; j<numPlayers+2; j++){
+        for(int i=0; i<12; i++){
+            cout << "─";
+        }
+        if (j==numPlayers+1){
+            cout << "┐";
+        } else {
+            cout << "┬";
+        }
+        
+    }
+    cout << endl;
+    cout << "│            " <<"│   Player   ";
+    for (int i = 0; i< numPlayers; i++) {
+        cout << "│   COM" << i << "     ";
+    }
+    cout << "│" << endl;
+    cout<<"├";
+    
+    for(int j=0; j<numPlayers+2; j++){
+        for(int i=0; i<12; i++){
+            cout << "─";
+        }
+        if (j == numPlayers+1){
+            cout<<"┤"<<endl;
+        } else {
+            cout << "┼";
+        }
+        
+    }
+    
+    
+    cout << "│ 1st dealt  " <<"│      "<<playerHand[0]<<"     ";
+    for (int i = 0; i< numPlayers; i++) {
+        cout << "│      " << playerAIHands[i][0] << "     ";
+    }
+    cout << "│" << endl;
+    cout<<"├";
+    for(int j=0; j<numPlayers+2; j++){
+        for(int i=0; i<12; i++){
+            cout << "─";
+        }
+        if (j == numPlayers+1){
+            cout<<"┤"<<endl;
+        } else {
+            cout << "┼";
+        }
+        
+    }
+    
+    cout << "│ 2nd dealt  " <<"│      "<<playerHand[1]<<"     ";
+    for (int i = 0; i< numPlayers; i++) {
+        cout << "│      " << playerAIHands[i][1] << "     ";
+    }
+    cout << "│" << endl;
+    cout<<"├";
+    for(int j=0; j<numPlayers+2; j++){
+        for(int i=0; i<12; i++){
+            cout << "─";
+        }
+        if (j == numPlayers+1){
+            cout<<"┤"<<endl;
+        } else {
+            cout << "┼";
+        }
+        
+    }
+    cout << "│   Total    " <<"│     "<<playerScore<<"     ";
+    for (int i = 0; i< numPlayers; i++) {
+        cout << "│     " << playerAIScore[i] << "     ";
+    }
+    cout << "│" << endl;
+    cout<<"└";
+    for(int j=0; j<numPlayers+2; j++){
+        for(int i=0; i<12; i++){
+            cout << "─";
+        }
+        if (j == numPlayers+1){
+            cout << "┘";
+        } else {
+            cout <<"┴";
+        }
+    }
+    
+    cout<<endl;
+
 }
 
 void Model::playerSplitTurn() {
