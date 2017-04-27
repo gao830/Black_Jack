@@ -312,6 +312,7 @@ void Model::playerTurn() {
     if(chartNum == 1) {
         chart();
         chartNum = 0;
+        chart2();
         chartNum2 = 1;
     } 
     
@@ -548,6 +549,7 @@ void Model::chart2() {
     cout << endl;
     cout << "│            " <<"│   Player   ";
     for (int i = 0; i< numPlayers; i++) {
+        
         cout << "│   COM" << i << "     ";
     }
     cout << "│" << endl;
@@ -564,10 +566,25 @@ void Model::chart2() {
         }
         
     }
-
-    cout << "│   Total    " <<"│     "<<playerScore<<"     ";
+//    playerScore = 100;
+    if (playerScore>=100){
+        cout << "│   Total    " <<"│    "<<playerScore<<"     ";
+    } else if(playerScore>=10) {
+        cout << "│   Total    " <<"│     "<<playerScore<<"     ";
+    } else {
+        cout << "│   Total    " <<"│      "<<playerScore<<"     ";
+    }
+    
     for (int i = 0; i< numPlayers; i++) {
-        cout << "│     " << playerAIScore[i] << "     ";
+//        playerAIScore[i] = 118;
+        if(playerAIScore[i] >= 100) {
+            cout << "│    " << playerAIScore[i] << "     ";
+        } else if (playerAIScore[i] >= 10){
+            cout << "│     " << playerAIScore[i] << "     ";
+        } else {
+            cout << "│      " << playerAIScore[i] << "     ";
+        }
+        
     }
     cout << "│" << endl;
     cout<<"└";
@@ -633,14 +650,57 @@ void Model::chart() {
 //case 14:
 //    faceCard = "A";
 
+    string faceCard;
+    switch (playerHand[0]) {
+        case 10:
+            faceCard = "T";
+            break;
+        case 11:
+            faceCard = "J";
+            break;
+        case 12:
+            faceCard = "Q";
+            break;
+        case 13:
+            faceCard = "K";
+            break;
+        case 14:
+            faceCard = "A";
+            break;
+        default:
+            ostringstream convert;
+            convert << playerHand[0];
+            faceCard = convert.str();
+    }
     
-    cout << "│ 1st dealt  " <<"│      "<<playerHand[0]<<"     ";
+    
+    cout << "│ 1st dealt  " <<"│      "<<faceCard<<"     ";
     for (int i = 0; i< numPlayers; i++) {
-        if (playerAIHands[i][0]>9){
-            cout << "│     " << playerAIHands[i][0] << "     ";
-        } else {
-            cout << "│      " << playerAIHands[i][0] << "     ";
+        
+        switch (playerAIHands[i][0]) {
+            case 10:
+                faceCard = "T";
+                break;
+            case 11:
+                faceCard = "J";
+                break;
+            case 12:
+                faceCard = "Q";
+                break;
+            case 13:
+                faceCard = "K";
+                break;
+            case 14:
+                faceCard = "A";
+                break;
+            default:
+                ostringstream convert;
+                convert << playerAIHands[i][0];
+                faceCard = convert.str();
         }
+
+        cout << "│      " << faceCard << "     ";
+        
 //        cout << "│      " << playerAIHands[i][0] << "     ";
     }
     cout << "│" << endl;
@@ -657,30 +717,53 @@ void Model::chart() {
         
     }
     
-    cout << "│ 2nd dealt  " <<"│      "<<playerHand[1]<<"     ";
-    for (int i = 0; i< numPlayers; i++) {
-        if (playerAIHands[i][1]>9){
-            cout << "│     " << playerAIHands[i][0] << "     ";
-        } else {
-            cout << "│      " << playerAIHands[i][0] << "     ";
-        }
+    switch (playerHand[1]) {
+        case 10:
+            faceCard = "T";
+            break;
+        case 11:
+            faceCard = "J";
+            break;
+        case 12:
+            faceCard = "Q";
+            break;
+        case 13:
+            faceCard = "K";
+            break;
+        case 14:
+            faceCard = "A";
+            break;
+        default:
+            ostringstream convert;
+            convert << playerHand[1];
+            faceCard = convert.str();
     }
-    cout << "│" << endl;
-    cout<<"├";
-    for(int j=0; j<numPlayers+2; j++){
-        for(int i=0; i<12; i++){
-            cout << "─";
+    
+    cout << "│ 2nd dealt  " <<"│      "<<faceCard<<"     ";
+    for (int i = 0; i< numPlayers; i++) {
+        switch (playerAIHands[i][1]) {
+            case 10:
+                faceCard = "T";
+                break;
+            case 11:
+                faceCard = "J";
+                break;
+            case 12:
+                faceCard = "Q";
+                break;
+            case 13:
+                faceCard = "K";
+                break;
+            case 14:
+                faceCard = "A";
+                break;
+            default:
+                ostringstream convert;
+                convert << playerAIHands[i][1];
+                faceCard = convert.str();
         }
-        if (j == numPlayers+1){
-            cout<<"┤"<<endl;
-        } else {
-            cout << "┼";
-        }
+            cout << "│      " << faceCard << "     ";
         
-    }
-    cout << "│   Total    " <<"│     "<<playerScore<<"     ";
-    for (int i = 0; i< numPlayers; i++) {
-        cout << "│     " << playerAIScore[i] << "     ";
     }
     cout << "│" << endl;
     cout<<"└";
@@ -689,11 +772,29 @@ void Model::chart() {
             cout << "─";
         }
         if (j == numPlayers+1){
-            cout << "┘";
+            cout<<"┘"<<endl;
         } else {
-            cout <<"┴";
+            cout << "┴";
         }
+        
     }
+//    cout << "│   Total    " <<"│     "<<playerScore<<"     ";
+//    for (int i = 0; i< numPlayers; i++) {
+//        
+//        cout << "│     " << playerAIScore[i] << "     ";
+//    }
+//    cout << "│" << endl;
+//    cout<<"└";
+//    for(int j=0; j<numPlayers+2; j++){
+//        for(int i=0; i<12; i++){
+//            cout << "─";
+//        }
+//        if (j == numPlayers+1){
+//            cout << "┘";
+//        } else {
+//            cout <<"┴";
+//        }
+//    }
     
     cout<<endl;
 
