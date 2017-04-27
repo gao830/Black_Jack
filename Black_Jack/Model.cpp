@@ -48,7 +48,7 @@ string Model::drawCard(int currentPlayer) {
     string cardDrawn;
     int suit = rand() % 4;
     int card = rand() % 13;
-    int chosenCard = deck[suit][card];
+    int chosenCard = deck[suit][card]; 
     if(currentPlayer == 0) {
         dealerHand[dealerHandSize] = chosenCard;
         dealerHandSize++;
