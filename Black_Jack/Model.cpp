@@ -48,7 +48,7 @@ string Model::drawCard(int currentPlayer) {
     string cardDrawn;
     int suit = rand() % 4;
     int card = rand() % 13;
-    int chosenCard = deck[suit][4];
+    int chosenCard = deck[suit][card];
     if(currentPlayer == 0) {
         dealerHand[dealerHandSize] = chosenCard;
         dealerHandSize++;
@@ -618,10 +618,30 @@ void Model::chart() {
         
     }
     
+//case 10:
+//    faceCard = "T";
+//    break;
+//case 11:
+//    faceCard = "J";
+//    break;
+//case 12:
+//    faceCard = "Q";
+//    break;
+//case 13:
+//    faceCard = "K";
+//    break;
+//case 14:
+//    faceCard = "A";
+
     
     cout << "│ 1st dealt  " <<"│      "<<playerHand[0]<<"     ";
     for (int i = 0; i< numPlayers; i++) {
-        cout << "│      " << playerAIHands[i][0] << "     ";
+        if (playerAIHands[i][0]>9){
+            cout << "│     " << playerAIHands[i][0] << "     ";
+        } else {
+            cout << "│      " << playerAIHands[i][0] << "     ";
+        }
+//        cout << "│      " << playerAIHands[i][0] << "     ";
     }
     cout << "│" << endl;
     cout<<"├";
@@ -639,7 +659,11 @@ void Model::chart() {
     
     cout << "│ 2nd dealt  " <<"│      "<<playerHand[1]<<"     ";
     for (int i = 0; i< numPlayers; i++) {
-        cout << "│      " << playerAIHands[i][1] << "     ";
+        if (playerAIHands[i][1]>9){
+            cout << "│     " << playerAIHands[i][0] << "     ";
+        } else {
+            cout << "│      " << playerAIHands[i][0] << "     ";
+        }
     }
     cout << "│" << endl;
     cout<<"├";
